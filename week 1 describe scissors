@@ -1,0 +1,15 @@
+scissors = {
+	"parts" : ["blade" , "tool holder","blade body"],
+	"blade":{
+		"sharp":true,
+		"metal":true
+	},
+	"tool holder":{
+		"sharp": false,
+		"metal":false
+	},
+	"blade body":{
+		"sharp":false,
+		"metal":false
+	}
+}
