@@ -1,4 +1,3 @@
-
 name = raw_input('Name of the player?: ')
 print(name + "Let us plan for your travel during this vocatino!") 
 
