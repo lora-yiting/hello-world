@@ -1,7 +1,9 @@
 from turtle import *
 speed(1000)
 colors = ['red', 'purple', 'blue', 'green', 'yellow', 'orange',]
-number = raw_input('choose a number between 1 and 10: ')
+number = raw_input('choose a number between 1 and 7: ')
+
+
 if number == "1":
   # for loop for drawing left(150)
   for x in range(360):
@@ -51,3 +53,4 @@ elif number == "7":
     width(x / 100 + 1)
     forward(x)
     left(750)
+
