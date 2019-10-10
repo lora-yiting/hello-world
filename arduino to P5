@@ -1,0 +1,75 @@
+//arduino sensing potentiometer with a connect with LED
+//------------------------------------------------------
+const int led1Pin =  9; // pin number for LED output 
+const int sensorPin = 0; // pin number for sensing potentiometer
+int brightness = 0;    // variable for indicating how bright the LED is
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(led1Pin, OUTPUT);  // Set up the LED pin to be an output:  
+  
+}
+
+void loop() {
+  Serial.write(brightness);
+  int sensorValue;
+  sensorValue = analogRead(sensorPin); // read from the potentiometer 
+  brightness = map(sensorValue, 0, 1023, 0, 255); // map the value from potentiometer (range from 0 to 1023) to the brightness (from 0 to 255)
+  // control the brightenss based on the sensor value
+  if (sensorValue >= 0) {
+    analogWrite(led1Pin, brightness);  // turn the LED on with certain brightness
+    Serial.print(brightness);
+    Serial.println(" ");
+    delay(10);
+  }
+}
+
+
+
+//P5 connected code worked on the website
+//------------------------------------------------------
+
+var serial;          // variable to hold an instance of the serialport library
+var portName = '/dev/tty.usbserial-DN05135N';  // fill in your serial port name here
+
+var inData;
+
+function setup() {
+  createCanvas(600, 600);
+  
+  serial = new p5.SerialPort();       // make a new instance of the serialport library
+  serial.on('connected', serverConnected); // callback for connecting to the server
+  serial.on('open', portOpen);        // callback for the port opening
+  serial.on('data', serialEvent);     // callback for when new data arrives
+  //serial.on('error', serialError);    // callback for errors
+  //serial.on('close', portClose);      // callback for the port closing
+
+  serial.open(portName);              // open a serial port
+}
+
+function draw(){
+  background(0,150,300);
+	print(inData);
+  noStroke();
+  rect(width/2-inData/2, height/2-inData/2, inData,inData);
+}
+
+function serverConnected() {
+  print('connected to server.');
+}
+
+function portOpen() {
+  print('the serial port opened.')
+}
+
+function serialEvent() {
+  inData = Number(serial.read());
+}
+
+function serialError(err) {
+  print('Something went wrong with the serial port. ' + err);
+}
+
+function portClose() {
+  print('The serial port closed.');
+}
